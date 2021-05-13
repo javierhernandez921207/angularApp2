@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IProduct} from './product';
+import {ProductService} from './productService';
 
 @Component({
   selector: 'pm-product-list',
@@ -12,31 +13,16 @@ export class ProductListComponent implements OnInit {
   imageWidth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
-  products: IProduct[] = [
-    {
-      id: 1,
-      name: 'Car',
-      code: 'o GG sDB 78',
-      price: 45,
-      release: 'May 11, 2021',
-      starRating: 4.2,
-      description: 'asdasdasdasdasdasdasdasdasdasd asdasdasdasdas as dasd asd',
-      imgUrl: 'http://localhost:4200/assets/images/garden_cart.png'
-    },
-    {
-      id: 1,
-      name: 'Hammer 2',
-      code: 'ok hG GF Fgd 78',
-      price: 20,
-      release: 'May 11, 2021',
-      starRating: 4.8,
-      description: 'SVGFEColorMatrixElement as dasdasdasdasdasd asd asd as d',
-      imgUrl: 'http://localhost:4200/assets/images/hammer.png'
-    }
-  ];
+  products: IProduct[];
+  filteredProducts: IProduct[];
+  private _listFilter;
 
-  filteredProducts: IProduct[] = this.products;
-  private _listFilter: string = '';
+
+  constructor(private productService: ProductService) {
+    this._listFilter = '';
+    this.products = this.productService.getProducts();
+    this.filteredProducts = this.products;
+  }
 
   get listFilter(): string {
     return this._listFilter;
@@ -59,6 +45,10 @@ export class ProductListComponent implements OnInit {
     filterBy = filterBy.toLocaleLowerCase();
     return this.products.filter((product: IProduct) =>
       product.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
+
+  onRatingClicked(mensaje: string): void {
+    this.pageTitle = 'Lista de Productos ' + mensaje;
   }
 
 }
