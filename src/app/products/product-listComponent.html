@@ -37,9 +37,11 @@
                    [style.margin.px]="imageMargin"></td>
           <td>{{prod.name}}</td>
           <td>{{prod.code | lowercase | convertToSpace: ' '}}</td>
-          <td>{{prod.release}}</td>
-          <td>{{prod.price}}</td>
-          <td>{{prod.starRating}}</td>
+          <td>{{prod.release | date}}</td>
+          <td>{{prod.price | currency}}</td>
+          <td>
+            <pm-star></pm-star>
+          </td>
         </tr>
         </tbody>
       </table>

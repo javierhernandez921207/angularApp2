@@ -35,20 +35,16 @@ export class ProductListComponent implements OnInit {
     }
   ];
 
-  filteredProducts: IProduct[] = [];
-  private _listFilter: string = 'car';
-
-  constructor() {
-    this.filteredProducts = this.products;
-  }
+  filteredProducts: IProduct[] = this.products;
+  private _listFilter: string = '';
 
   get listFilter(): string {
     return this._listFilter;
-    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
   }
 
   set listFilter(value: string) {
     this._listFilter = value;
+    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
   }
 
   toggleImage(): void {
