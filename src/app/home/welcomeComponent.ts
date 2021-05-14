@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './welcome.component.html'
+  templateUrl: './welcomeComponent.html'
 })
 export class WelcomeComponent {
   public pageTitle = 'Welcome';
